@@ -2,7 +2,7 @@ import Foundation
 import PackagePlugin
 
 @main
-struct ChocoBuildPlugin: BuildToolPlugin {
+struct Main: BuildToolPlugin {
     func createBuildCommands(context: PluginContext, target: Target) async throws -> [Command] {
         var commands = [Command]()
         try commands.append(lintCommand(context: context, target: target))
@@ -19,7 +19,7 @@ struct ChocoBuildPlugin: BuildToolPlugin {
             arguments: [
                 "lint",
                 "--config",
-                context.package.directory.string + "/../../.swiftlint.yml",
+                context.package.directory.string + "/.swiftlint.yml",
                 "--strict",
                 "--no-cache",
                 "--in-process-sourcekit",
@@ -35,7 +35,7 @@ struct ChocoBuildPlugin: BuildToolPlugin {
         guard isImplementationModule else { return [] }
 
         let executable = try context.tool(named: "swiftgen").path
-        let generatedFilesFolder = context.pluginWorkDirectory.appending("Generated")
+        let generatedFilesFolder = context.pluginWorkDirectory
         var swiftGenCommands = [Command]()
 
         if let storyboard = try filePaths(in: target.directory.string, suffix: ".storyboard") {
@@ -124,12 +124,12 @@ struct ChocoBuildPlugin: BuildToolPlugin {
                 "--sources",
                 context.package.directory.appending("Sources", interfaceModule),
                 "--output",
-                context.pluginWorkDirectory.appending("Generated"),
+                context.pluginWorkDirectory,
                 "--disableCache",
                 "--verbose"
             ],
             environment: [:],
-            outputFilesDirectory: context.pluginWorkDirectory.appending("Generated")
+            outputFilesDirectory: context.pluginWorkDirectory
         )
         return [sourceryCommand]
     }
@@ -150,12 +150,12 @@ struct ChocoBuildPlugin: BuildToolPlugin {
                 "--sources",
                 context.package.directory.appending("Sources", implementationModule.name),
                 "--output",
-                context.pluginWorkDirectory.appending("Generated"),
+                context.pluginWorkDirectory,
                 "--disableCache",
                 "--verbose"
             ],
             environment: [:],
-            outputFilesDirectory: context.pluginWorkDirectory.appending("Generated")
+            outputFilesDirectory: context.pluginWorkDirectory
         )
         return [sourceryCommand]
     }

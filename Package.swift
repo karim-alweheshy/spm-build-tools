@@ -1,16 +1,22 @@
-// swift-tools-version:5.6
+// swift-tools-version:5.7
 
+import Foundation
 import PackageDescription
 
 let package = Package(
-    name: "BuildSystemPlugins",
+    name: "BuildSystemPlugin",
     products: [
-        .plugin(name: "choco-build-plugin", targets: ["ChocoBuildPlugin"])
+        .library(name: "Example", targets: ["Example"]),
+        .plugin(name: "BuildSystemPlugin", targets: ["BuildSystemPlugin"])
     ],
     dependencies: [],
     targets: [
+        .target(
+            name: "Example",
+            plugins: [.plugin(name: "BuildSystemPlugin")]
+        ),
         .plugin(
-            name: "ChocoBuildPlugin",
+            name: "BuildSystemPlugin",
             capability: .buildTool(),
             dependencies: [
                 .target(name: "swiftlint"),
@@ -20,15 +26,15 @@ let package = Package(
         ),
         .binaryTarget(
             name: "swiftlint",
-            path: "swiftlint.artifactbundle"
+            path: "Binaries/swiftlint.artifactbundle"
         ),
         .binaryTarget(
             name: "swiftgen",
-            path: "swiftgen.artifactbundle"
+            path: "Binaries/swiftgen.artifactbundle"
         ),
         .binaryTarget(
             name: "sourcery",
-            path: "sourcery.artifactbundle"
+            path: "Binaries/sourcery.artifactbundle"
         )
     ]
 )

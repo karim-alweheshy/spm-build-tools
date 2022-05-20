@@ -6,7 +6,7 @@
             "version": "6.5.1",
             "variants": [
                 {
-                    "path": "swiftgen/bin/swiftgen",
+                    "path": "swiftgen-6.5.1/bin/swiftgen",
                     "supportedTriples": ["x86_64-apple-macosx", "arm64-apple-macosx"]
                 },
             ]

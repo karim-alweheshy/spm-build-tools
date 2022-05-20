@@ -1,0 +1,20 @@
+# rules that have both warning and error levels, can set just the warning level
+# implicitly
+line_length: 250
+type_body_length:
+  - 500  # warning
+  - 1200 # error
+file_length:
+  warning: 500
+  error: 1200
+disabled_rules:
+  - force_cast
+  - force_try
+  - todo
+  - identifier_name
+  - large_tuple
+  - empty_enum_arguments
+generic_type_name:
+  max_length: 40
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
