@@ -1,0 +1,15 @@
+{
+    "schemaVersion": "1.0",
+    "artifacts": {
+        "swiftlint": {
+            "version": "0.46.5",
+            "type": "executable",
+            "variants": [
+                {
+                    "path": "swiftlint/bin/swiftlint",
+                    "supportedTriples": ["x86_64-apple-macosx", "arm64-apple-macosx"]
+                }
+            ]
+        }
+    }
+}
