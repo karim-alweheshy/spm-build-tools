@@ -1,5 +1,7 @@
 # BuildSystemPlugins
 
+THIS SERVES AS AN EXAMPLE AND IS NOT PRODUCTION READY
+
 With the release of latest RC from Xcode 13.4 we can now have pre-/post-build scripts on the package level
 
 This package introduces SwiftGen, SwiftLint and Sourcery to the DeliveryCheckMultiProblem package
