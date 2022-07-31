@@ -13,13 +13,14 @@ struct Main: BuildToolPlugin {
     }
 
     private func lintCommand(context: PluginContext, target: Target) throws -> Command {
-        Command.buildCommand(
+        let executablePath = try context.tool(named: "swiftlint").path
+        return Command.buildCommand(
             displayName: "Linting \(target.name)",
-            executable: try context.tool(named: "swiftlint").path,
+            executable: executablePath,
             arguments: [
                 "lint",
                 "--config",
-                context.package.directory.string + "/.swiftlint.yml",
+                executablePath.removingLastComponent().string + "/.swiftlint.yml",
                 "--strict",
                 "--no-cache",
                 "--in-process-sourcekit",
